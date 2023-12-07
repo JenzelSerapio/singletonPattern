@@ -1,28 +1,22 @@
-
 public class PagIbigOffice {
     public static void main(String[] args) {
-        QueueSystem centralizedQueueSystem = new QueueSystem();
+        HelpDesk station = HelpDesk.getInstance();
 
-        HelpDesk helpDesk1 = new HelpDesk(centralizedQueueSystem);
-        HelpDesk helpDesk2 = new HelpDesk(centralizedQueueSystem);
-        HelpDesk helpDesk3 = new HelpDesk(centralizedQueueSystem);
+        station.nextCustomer();
+        station.nextCustomer();
+        station.nextCustomer();
 
-        OnlineMonitoringSystem monitoringSystem = new OnlineMonitoringSystem(centralizedQueueSystem);
+        int currentQueueNumber = station.getCurrentQueueNumber();
+        System.out.println("CURRENT queue number: " + currentQueueNumber);
 
+        station.reset(5);
 
-        centralizedQueueSystem.enqueue(1);
-        centralizedQueueSystem.enqueue(2);
-        centralizedQueueSystem.enqueue(3);
+        station.nextCustomer();
+        station.nextCustomer();
+        station.nextCustomer();
 
-        helpDesk1.resetQueueNumber(1);
-
-        monitoringSystem.displayCurrentQueueNumber();
-
-        helpDesk1.serveNextCustomer();
-        helpDesk2.serveNextCustomer();
-        helpDesk3.serveNextCustomer();
-
-
-
+        currentQueueNumber = station.getCurrentQueueNumber();
+        System.out.println("UPDATED queue number: " + currentQueueNumber);
+        
     }
 }
