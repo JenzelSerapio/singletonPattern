@@ -1,21 +1,30 @@
 public class HelpDesk {
 
-    private QueueSystem queueSystem;
+    private static HelpDesk instance;
+    private int currentQueueNumber;
 
-    public HelpDesk(QueueSystem queueSystem) {
-        this.queueSystem = queueSystem;
+    private HelpDesk() {
+
+        this.currentQueueNumber = 1;
     }
 
-    public void serveNextCustomer() {
-        try {
-            int nextCustomer = queueSystem.dequeue();
-            System.out.println("Serving customer with queue number: " + nextCustomer);
-        } catch (IllegalStateException e) {
-            System.out.println("No customers in the queue");
+    public int getCurrentQueueNumber() {
+        return currentQueueNumber;
+    }
+    public static HelpDesk getInstance() {
+        if (instance == null) {
+            instance = new HelpDesk();
         }
+        return instance;
     }
 
-    public void resetQueueNumber(int newNumber) {
-        queueSystem.resetQueue(newNumber);
+    public void reset(int newQueueNumber) {
+        System.out.println("We are resetting the queue number to: " + newQueueNumber);
+        currentQueueNumber = newQueueNumber;
     }
+    public void nextCustomer() {
+        System.out.println("The helpdesk is now processing customer with queue number: " + currentQueueNumber);
+        currentQueueNumber++;
+    }
+
 }
