@@ -11,18 +11,18 @@ public class HelpDesk {
     public int getCurrentQueueNumber() {
         return currentQueueNumber;
     }
-    public static HelpDesk getInstance() {
+    public static synchronized HelpDesk getInstance() {
         if (instance == null) {
             instance = new HelpDesk();
         }
         return instance;
     }
 
-    public void reset(int newQueueNumber) {
+    public synchronized void reset(int newQueueNumber) {
         System.out.println("We are resetting the queue number to: " + newQueueNumber);
         currentQueueNumber = newQueueNumber;
     }
-    public void nextCustomer() {
+    public synchronized void nextCustomer() {
         System.out.println("The helpdesk is now processing customer with queue number: " + currentQueueNumber);
         currentQueueNumber++;
     }
